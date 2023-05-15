@@ -26,7 +26,7 @@ string descripcion_marcas[15];
 string tipo_mantenimiento[25];
 string codigo_mantenimiento[25];
 string descripcion_mantenimiento[25];
-string codigo_repuesto[25];
+//string codigo_repuesto[25];
 float valor_mantenimiento[25];
 
 
@@ -44,7 +44,7 @@ void ingresarDatosRepuestos();
 
 int main()
 {
- //   ingresarDatosMarcas();
+    //ingresarDatosMarcas();
     ingresarDatosMantenimiento();
     ingresarDatosRepuestos();
     //mostrarMarcas();
@@ -59,7 +59,7 @@ int main()
 
 void ingresarDatosMarcas() {
     cout << "Hola, al ser esta la primera vez interactuando con el programa, necesitaremos que rellenes informacion acerca las marcas de los autos, no tardara nada." << endl;
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < 15; i++) { //15
         cout << "Ingrese el nombre de una marca de autos lujosa: "<<endl; getline(cin,marcas[i]);
         for (int j = 0; j < i; j++) {
             if (marcas[i] == marcas[j]) {
@@ -79,21 +79,27 @@ void ingresarDatosMarcas() {
 
 void ingresarDatosMantenimiento() {
     cout << "Hola, necesitamos que rellenes informacion acerca el mantenimiento: " << endl;
-    for (int i = 0; i < 25; i++) {
+    for (int i = 0; i < 25; i++) { //25
         cout << "Ingrese el tipo de mantenimiento: " << endl; getline(cin, tipo_mantenimiento[i]);
         cout << "Ingrese el codigo de mantenimiento: " << endl; getline(cin, codigo_mantenimiento[i]);
         cout << "Ingrese una descripcion del mantenimiento: " << endl; getline(cin, descripcion_mantenimiento[i]);
-        cout << "Ingrese el codigo del repuesto que se necesita para el mantenimiento: " << endl; getline(cin, codigo_repuesto[i]);
-        cout << "Ingrese el valor del mantenimiento: " << endl; cin >> valor_mantenimiento[i];
+        //cout << "Ingrese el valor del mantenimiento: " << endl; cin >> valor_mantenimiento[i]; Al pedir dato corrompe el tipo_mantenimiento
     }
 }
 
 void ingresarDatosRepuestos() {
     cout << "Presta mucha atencion, para que todo este bien. Deberas de relacionar correctamente los repuestos con los tipos de mantenimientos que hayan."<<endl;
     for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 25; j++) {
-            cout << "Del mantenimiento " << tipo_mantenimiento[j] << " con codigo " << codigo_mantenimiento[j] << ",que tipo de repuesto hay disponible: " << endl; getline(cin, repuestos[i][j]);
-            cout << "Del repuesto " << repuestos[i][j] << " cual es el identificador de este: ";
+        for (int j = 0; j < 25; j++) {//25
+            if (i == 0) {
+                cout << "Del mantenimiento " << tipo_mantenimiento[j] << " con codigo " << codigo_mantenimiento[j] << ",que tipo de repuesto hay disponible: " << endl; getline(cin, repuestos[i][j]);
+            }
+            else if (i == 1) {
+                cout << "Del repuesto " << repuestos[0][j] << " cual es el identificador de este: "; getline(cin, repuestos[i][j]);
+            }
+            else if (i == 2) {
+                cout << "Del repuesto " << repuestos[0][j] << " ingrese una breve descripcion: "; getline(cin, repuestos[i][j]);
+            }
         }
         
     }
