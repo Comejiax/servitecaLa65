@@ -19,21 +19,17 @@ string marcas[15];
 string codigo_marcas[15];
 string descripcion_marcas[15];
 
-//marcas[numero] = "nueva marca";
-//Los maestros deben ser dinámicos
 
     //Maestro Mantenimientos
 string tipo_mantenimiento[25];
 string codigo_mantenimiento[25];
 string descripcion_mantenimiento[25];
-//string codigo_repuesto[25];
 float valor_mantenimiento[25];
 
 
     //Maestro Repuestos
 string repuestos[3][25]; //Fila 0 ->Repuesto, Fila 1 -> codigo repuesto, Fila 2 -> Descripción del repuesto
-/*string codigo_repuesto[];
-string descripcion_repuesto[];*/
+
 
 
 //Declaración de funciones
@@ -52,13 +48,120 @@ int main()
     ingresarDatosMarcas();
     ingresarDatosMantenimiento();
     ingresarDatosRepuestos();
-    //mostrarMarcas();
+    cout << "FELICITACIONES, HAS LLENADO CORRECTAMENTE LOS DATOS. BIENVENIDO AL PROGRAMA" << endl << endl;
+
+    int opcion, numero;
+    cout << "BIENVENIDO AL SISTEMA DE SERVITECA LA 45 S.A.S\n\n";
+    cout << "1. Maestros\n";
+    cout << "2. Movimientos\n";
+    cin >> numero;
+    cin.ignore();
+    system("cls");
+
+    //MENU DE LOS MAESTROS
+    if (numero == 1) {
+        cout << "INDICA EL MAESTRO AL QUE QUIERES ACCEDER\n";
+        cout << "1. Maestro de las marcas de vehiculos que manejamos\n";
+        cout << "2. Maestro de los mantenimientos que ofrecemos\n";
+        cout << "3. Maestro de los repuestos que comercializamos\n";
+        cout << "4. Salir de este menu\n";
+        cout << "OPCION:";
+        cin >> opcion;
+        cin.ignore();
+        system("cls");
+
+        do {
+            switch (opcion)
+            {
+                //MANEJO DEL MAESTRO DE MARCAS
+            case 1:
+                int maestro_opc;
+                cout << "BIENVENIDO A NUESTRO MAESTRO DE MARCAS\n";
+                cout << "Aqui guardamos un registro de las marcas que manejamos junto a su descripcion\n";
+                cout << "1. Mostrar en pantalla el maestro de marcas\n";
+                cout << "2. Desea editar alguna marca al maestro\n";
+                cout << "3. Desea eliminar alguna marca\n";
+                cin >> maestro_opc;
+                cin.ignore();
+                system("cls");
+
+                if (maestro_opc == 1) {
+                    int contador;
+                    contador = 0;
+                    cout << "AQUI TE MOSTRAMOS LAS MARCAS QUE MANEJAMOS EN SERVITECA LA 45\n\n";
+                    mostrarMarcas();
+                }
+                if (maestro_opc == 2) {
+                    editarMarcas();
+                }
+                if (maestro_opc == 3) {
+                    eliminarMarcas();
+                }
+                break;
+
+                case 2:
+
+                    cout << "BIENVENIDO A NUESTRO MAESTRO DE MANTENIMIENTOS\n";
+                    cout << "Aqui guardamos un registro de los mantenimientos que ofrecemos junto a su informacion\n";
+                    cout << "1. Mostrar en pantalla el maestro de mantenimientos\n";
+                    cout << "2. Desea editar algun mantenimiento del maestro\n";
+                    cout << "3. Desea eliminar algun mantenimiento\n";
+                    // cout << "4. Desea retroceder\n";
+                    cin >> maestro_opc;
+                    cin.ignore();
+                    system("cls");
+
+                    if (maestro_opc == 1) {
+                        int contador;
+                        contador = 0;
+                        cout << "AQUI TE MOSTRAMOS LOS MANTENIMIENTOS QUE MANEJAMOS EN SERVITECA LA 45\n\n";
+                        mostrarMantenimientos();
+                    }
+                    if (maestro_opc == 2) {
+                        editarMarcas();
+                    }
+                    if (maestro_opc == 3) {
+                        eliminarMarcas();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        } while (opcion != 4);
+
+
+        //MENU DE MOVIMIENTOS
+        if (numero == 2) {
+            int movi;
+            cout << "MENÚ DE MOVIMIENTOS\n\n";
+            cout << "Bienvenido a nuestro menu de movimientos, aquí podrás generar la factura correspondiente al servicio prestado al cliente\n";
+            cout << "Cuentanos que deseas realizar el día de hoy\n";
+            cout << "1. Generar factura de venta\n";
+            cout << "2. Consultar costos de mantenimientos\n";
+            cin >> movi;
+            system("cls");
+
+            if (movi == 1) {
+                int mant, conf_mant, cod_mant;
+                cout << "GENERADOR DE FACTURAS (SERVITECA LA 45 S.A.S)\n\n";
+                cout << "A continuacion procederás a darnos un resumen de los articulos o procedimientos vendidos\n";
+                cout << "Se realizo algun tipo de mantenimiento\n";
+                cout << "1.Si\n";
+                cout << "2.No\n";
+                cin >> conf_mant;
+                if (conf_mant == 1) {
+                    cout << "indique el codigo del mantenimiento realizado";
+                    cin >> cod_mant;
+                }
+            }
+        }
+    }
 }
 
 void mostrarMarcas() {
-    for (int i = 0; i < 15; i++) {
-        cout << "Mostrando marcas, " << 15-i<< " marcas restantes" << endl;
-        cout << marcas[i] << "\t" << codigo_marcas[i] << "\t" << descripcion_marcas[i]<<"\n";
+    cout << "NOMBRE " << "\t" << "CODIGO" << "\t" << "DESCRIPCION" << endl;
+    for (int i = 0; i < 2; i++) { //15
+        cout << marcas[i] << "\t" << codigo_marcas[i] << "\t" << descripcion_marcas[i] << "\n" << "\n" << "\n";
     }
 }
 
@@ -83,14 +186,16 @@ void editarMarcas() {
 }
 
 void eliminarMarcas() {
+    mostrarMarcas();
     string marcaAEliminar = "";
     int posicionDeLaMarcaAEliminar = 0;
-    cout << "Ingrese el identificador de la marca que quieras eliminar: "; cin >> marcaAEliminar;
+    cout << "Ingrese el codigo de la marca que quieras eliminar: "; cin >> marcaAEliminar;
     for (int i = 0; i < 15; i++) {
         if (codigo_marcas[i] == marcaAEliminar) {
             marcas[i] = "";
             codigo_marcas[i] = "";
             descripcion_marcas[i] = "";
+            system("cls");
             break;
         }
     }
@@ -98,37 +203,38 @@ void eliminarMarcas() {
 }
 
 void ingresarDatosMarcas() {
-    cout << "Hola, al ser esta la primera vez interactuando con el programa, necesitaremos que rellenes informacion acerca las marcas de los autos, no tardara nada." << endl;
-    for (int i = 0; i < 15; i++) { //15
+    cout << "HOLA, AL SER LA PRIMERA VEZ INTERACTUANDO CON ESTE PROGRAMA, NECESITAMOS QUE RELLENES INFORMACION ACERCA DE LAS MARCAS DE LOS AUTOS, NO TARDARA NADA." << endl << endl;
+    for (int i = 0; i < 2; i++) { //15
         cout << "Ingrese el nombre de una marca de autos lujosa " << 15 - i << " autos restantes:" << endl; getline(cin, marcas[i]);
         for (int j = 0; j < i; j++) {
             if (marcas[i] == marcas[j]) {
                 cout << "Se ha encontrado ya un auto con esa marca, por favor ingrese una marca distinta: " << endl; getline(cin, marcas[i]);
             }
         }
-        cout << "Ingrese el código de la marca del auto " << marcas[i] << ": " << endl; getline(cin, codigo_marcas[i]);
+        cout << "Ingrese el codigo de la marca del auto " << marcas[i] << ": " << endl; getline(cin, codigo_marcas[i]);
         for (int j = 0; j < i; j++) {
             if (codigo_marcas[i] == codigo_marcas[j]) {
-                cout << "Se ha encontrado ya un auto con ese código de marca, por favor ingrese un código distinto: " << endl; getline(cin, codigo_marcas[i]);
+                cout << "Se ha encontrado ya un auto con ese codigo de marca, por favor ingrese un codigo distinto: " << endl; getline(cin, codigo_marcas[i]);
             }
         }
-        cout << "Ingrese una descripción del auto " << marcas[i]<<" con código "<<codigo_marcas[i] << ": " << endl; getline(cin, descripcion_marcas[i]);
-
+        cout << "Ingrese una descripcion del auto " << marcas[i] << " con codigo " << codigo_marcas[i] << ": " << endl; getline(cin, descripcion_marcas[i]);
+        system("cls");
     }
 }
 
 void ingresarDatosMantenimiento() {
-    cout << "Hola, necesitamos que rellenes informacion acerca el mantenimiento: " << endl;
-    for (int i = 0; i < 25; i++) { //25
+    cout << "HOLA DE NUEVO, AHORA NECESITAMOS QUE RELLENES INFORMACION ACERCA DE LOS MANTENIMIENTOS: " << endl << endl;
+    for (int i = 0; i < 3; i++) { //25
         cout << "Ingrese el tipo de mantenimiento: " << endl; getline(cin, tipo_mantenimiento[i]);
         cout << "Ingrese el codigo de mantenimiento: " << endl; getline(cin, codigo_mantenimiento[i]);
         cout << "Ingrese una descripcion del mantenimiento: " << endl; getline(cin, descripcion_mantenimiento[i]);
         //cout << "Ingrese el valor del mantenimiento: " << endl; cin >> valor_mantenimiento[i]; Al pedir dato corrompe el tipo_mantenimiento
+        system("cls");
     }
 }
 
 void ingresarDatosRepuestos() {
-    cout << "Presta mucha atencion, para que todo este bien. Deberas de relacionar correctamente los repuestos con los tipos de mantenimientos que hayan."<<endl;
+    cout << "Presta mucha atencion, para que todo este bien. Deberas de relacionar correctamente los repuestos con los tipos de mantenimientos que hayan." << endl;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 25; j++) {//25
             if (i == 0) {
@@ -141,16 +247,15 @@ void ingresarDatosRepuestos() {
                 cout << "Del repuesto " << repuestos[0][j] << " ingrese una breve descripcion: "; getline(cin, repuestos[i][j]);
             }
         }
-        
+        system("cls");
     }
-
 }
 
 
 
 void mostrarMantenimientos() {
-    for (int i = 0; i < 25; i++) {
-        cout << "Mostrando mantenimientos, " << 15 - i << " mantenimientos restantes" << endl;
-        cout << tipo_mantenimiento[i] << "\t" << codigo_mantenimiento[i] << "\t" << descripcion_mantenimiento[i] << "\n" << valor_mantenimiento;
+    cout << "MANTENIMIENTO " << "\t" << "CODIGO" << "\t" << "DESCRIPCION" << endl;
+    for (int i = 0; i < 3; i++) {//25
+        cout << tipo_mantenimiento[i] << "\t" << "\t"  << codigo_mantenimiento[i] << "\t"  << descripcion_mantenimiento[i] /*<< "\t" << valor_mantenimiento << "\n";*/ << endl;
     }
 }

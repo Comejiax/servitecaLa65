@@ -1,1 +1,3 @@
-﻿  ServitecaLa45SAS.vcxproj -> C:\Users\migep\OneDrive\Documentos\_Programación\C++\ServitecaLa45SAS\x64\Debug\ServitecaLa45SAS.exe
+﻿  ServitecaLa45SAS.cpp
+C:\Users\migep\OneDrive\Documentos\_Programación\C++\ServitecaLa45SAS\ServitecaLa45SAS\ServitecaLa45SAS.cpp(134,21): warning C4101: 'mant': variable local sin referencia
+  ServitecaLa45SAS.vcxproj -> C:\Users\migep\OneDrive\Documentos\_Programación\C++\ServitecaLa45SAS\x64\Debug\ServitecaLa45SAS.exe
