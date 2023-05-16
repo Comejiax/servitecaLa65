@@ -336,19 +336,20 @@ void eliminarMantenimiento() {
 
 
 void mostrarRepuestos() {
-    //cout << "REPUESTO " << "\t" << "CODIGO" << "\t" << "DESCRIPCION" << endl;
-    for (int i = 0; i < 2; i++) {//2
-        if (i == 0) {
-            cout << "REPUESTO";
+    cout << "REPUESTO " << "\t" << "CODIGO" << "\t" << "DESCRIPCION" << endl;
+    for (int i = 0; i < 25; i++) { //3 Originalmente
+       /* if (i == 0) {
+            cout << "\nREPUESTO \n";
         }
         else if (i == 1) {
-            cout << "CODIGO";
+            cout << "\nCODIGO \n";
         }
         else if (i == 2) {
-            cout << "DESCRIPCION";
-        }
-        for (int j = 0; j < 25; j++) {
-            cout << repuestos[i][j];
-        }
+            cout << "\nDESCRIPCION \n";
+        }*/
+        /*for (int j = 0; j < 25; j++) {
+            cout << repuestos[0][j] << "  ";
+        }*/
+        cout << repuestos[0][i] <<"\n" << repuestos[1][i] << "\n" << repuestos[2][i];
     }
 }
