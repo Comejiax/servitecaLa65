@@ -37,30 +37,49 @@ string descripcion_repuesto[];*/
 
 
 //Declaración de funciones
-//void mostrarMarcas();
+void mostrarMarcas();
+void editarMarcas();
 void ingresarDatosMarcas();
 void ingresarDatosMantenimiento();
 void ingresarDatosRepuestos();
 
 int main()
 {
-    //ingresarDatosMarcas();
+    ingresarDatosMarcas();
     ingresarDatosMantenimiento();
     ingresarDatosRepuestos();
     //mostrarMarcas();
 }
 
-/*void mostrarMarcas() {
+void mostrarMarcas() {
     for (int i = 0; i < 15; i++) {
-        cout << i<<endl;
+        cout << "Mostrando marcas, " << 15-i<< " marcas restantes" << endl;
         cout << marcas[i] << "\t" << codigo_marcas[i] << "\t" << descripcion_marcas[i]<<"\n";
     }
-}*/
+}
+
+void editarMarcas() {
+    string marcaAEditar = "";
+    int posicionDeLaMarcaAEditar = 0;
+    cout << "Ingrese el identificador de la marca que quieras editar: "; cin >> marcaAEditar;
+    for (int i = 0; i < 15; i++) {
+        if (codigo_marcas[i] == marcaAEditar) {
+            posicionDeLaMarcaAEditar = i;
+        }
+        cout << "Ingrese la marca nueva: ";
+        getline(cin, marcas[i]);
+        cout << "Ingrese el codigo nuevo: ";
+        getline(cin, codigo_marcas[i]);
+        cout << "Ingrese la descripcion de la marca nueva: ";
+        getline(cin, descripcion_marcas[i]);
+    }
+
+}
 
 void ingresarDatosMarcas() {
     cout << "Hola, al ser esta la primera vez interactuando con el programa, necesitaremos que rellenes informacion acerca las marcas de los autos, no tardara nada." << endl;
     for (int i = 0; i < 15; i++) { //15
-        cout << "Ingrese el nombre de una marca de autos lujosa: "<<endl; getline(cin,marcas[i]);
+        cout << "Ingrese el nombre de una marca de autos lujosa " << 15 - i << " autos restantes:" << endl; getline(cin, marcas[i]);
         for (int j = 0; j < i; j++) {
             if (marcas[i] == marcas[j]) {
                 cout << "Se ha encontrado ya un auto con esa marca, por favor ingrese una marca distinta: " << endl; getline(cin, marcas[i]);
