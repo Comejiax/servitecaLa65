@@ -40,6 +40,9 @@ string descripcion_repuesto[];*/
 void mostrarMarcas();
 void editarMarcas();
 void eliminarMarcas();
+
+void mostrarMantenimientos();
+
 void ingresarDatosMarcas();
 void ingresarDatosMantenimiento();
 void ingresarDatosRepuestos();
@@ -75,6 +78,7 @@ void editarMarcas() {
             break;
         }
     }
+    mostrarMarcas();
 
 }
 
@@ -90,6 +94,7 @@ void eliminarMarcas() {
             break;
         }
     }
+    mostrarMarcas();
 }
 
 void ingresarDatosMarcas() {
@@ -139,4 +144,13 @@ void ingresarDatosRepuestos() {
         
     }
 
+}
+
+
+
+void mostrarMantenimientos() {
+    for (int i = 0; i < 25; i++) {
+        cout << "Mostrando mantenimientos, " << 15 - i << " mantenimientos restantes" << endl;
+        cout << tipo_mantenimiento[i] << "\t" << codigo_mantenimiento[i] << "\t" << descripcion_mantenimiento[i] << "\n" << valor_mantenimiento;
+    }
 }
