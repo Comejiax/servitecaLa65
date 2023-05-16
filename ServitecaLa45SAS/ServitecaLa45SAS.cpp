@@ -39,6 +39,7 @@ string descripcion_repuesto[];*/
 //Declaración de funciones
 void mostrarMarcas();
 void editarMarcas();
+void eliminarMarcas();
 void ingresarDatosMarcas();
 void ingresarDatosMantenimiento();
 void ingresarDatosRepuestos();
@@ -75,6 +76,20 @@ void editarMarcas() {
         }
     }
 
+}
+
+void eliminarMarcas() {
+    string marcaAEliminar = "";
+    int posicionDeLaMarcaAEliminar = 0;
+    cout << "Ingrese el identificador de la marca que quieras eliminar: "; cin >> marcaAEliminar;
+    for (int i = 0; i < 15; i++) {
+        if (codigo_marcas[i] == marcaAEliminar) {
+            marcas[i] = "";
+            codigo_marcas[i] = "";
+            descripcion_marcas[i] = "";
+            break;
+        }
+    }
 }
 
 void ingresarDatosMarcas() {
