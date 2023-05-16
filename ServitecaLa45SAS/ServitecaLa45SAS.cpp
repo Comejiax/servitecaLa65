@@ -65,13 +65,14 @@ void editarMarcas() {
     for (int i = 0; i < 15; i++) {
         if (codigo_marcas[i] == marcaAEditar) {
             posicionDeLaMarcaAEditar = i;
+            cout << "Ingrese la marca nueva: ";
+            getline(cin, marcas[i]);
+            cout << "Ingrese el codigo nuevo: ";
+            getline(cin, codigo_marcas[i]);
+            cout << "Ingrese la descripcion de la marca nueva: ";
+            getline(cin, descripcion_marcas[i]);
+            break;
         }
-        cout << "Ingrese la marca nueva: ";
-        getline(cin, marcas[i]);
-        cout << "Ingrese el codigo nuevo: ";
-        getline(cin, codigo_marcas[i]);
-        cout << "Ingrese la descripcion de la marca nueva: ";
-        getline(cin, descripcion_marcas[i]);
     }
 
 }
