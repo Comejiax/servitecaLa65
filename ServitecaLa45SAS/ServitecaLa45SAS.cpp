@@ -152,14 +152,12 @@ int main()
                         mostrarRepuestos();
                     }
                     if (maestro_opc == 2) {
-                        cout << "MANTENIMIENTOS DISPONIBLES: \n";
-                        editarMantenimientos();
+                        cout << "REPUESTOS DISPONIBLES: \n";
+                        editarRepuesto();
                     }
                     if (maestro_opc == 3) {
-                        eliminarMantenimiento();
+                        eliminarRepuestos();
                     }
-                    break;
-                default:
                     break;
             }
         } while (opcion != 4);
@@ -193,6 +191,8 @@ int main()
     }
 }
 
+
+//Definiendo las funciones
 void mostrarMarcas() {
     cout << "NOMBRE " << "\t" << "CODIGO" << "\t" << "DESCRIPCION" << endl;
     for (int i = 0; i < 2; i++) { //15
@@ -337,19 +337,43 @@ void eliminarMantenimiento() {
 
 void mostrarRepuestos() {
     cout << "REPUESTO " << "\t" << "CODIGO" << "\t" << "DESCRIPCION" << endl;
-    for (int i = 0; i < 25; i++) { //3 Originalmente
-       /* if (i == 0) {
-            cout << "\nREPUESTO \n";
-        }
-        else if (i == 1) {
-            cout << "\nCODIGO \n";
-        }
-        else if (i == 2) {
-            cout << "\nDESCRIPCION \n";
-        }*/
-        /*for (int j = 0; j < 25; j++) {
-            cout << repuestos[0][j] << "  ";
-        }*/
-        cout << repuestos[0][i] <<"\n" << repuestos[1][i] << "\n" << repuestos[2][i];
+    for (int i = 0; i < 25; i++) {
+        cout << repuestos[0][i] <<"\t" << repuestos[1][i] << "\t" << repuestos[2][i] <<endl;
     }
+}
+
+void editarRepuesto() {
+    mostrarRepuestos();
+    string repuestoAEditar = "";
+    cout << "Ingrese el codigo del repuesto que quieres editar: "; getline(cin, repuestoAEditar);
+    for (int i = 0; i < 25; i++) { //25
+        if (repuestos[1][i] == repuestoAEditar) {
+
+            cout << "Ingrese el repuesto nuevo: ";
+            getline(cin, repuestos[0][i]);
+            cout << "Ingrese el codigo nuevo: ";
+            getline(cin, repuestos[1][i]);
+            cout << "Ingrese la descripcion del repuesto nuevo: ";
+            getline(cin, repuestos[2][i]);
+            system("cls");
+            break;
+        }
+    }
+    mostrarRepuestos();
+}
+
+void eliminarRepuestos() {
+    mostrarRepuestos();
+    string repuestoAEditar = "";
+    cout << "Ingrese el codigo del repuesto que quieres eliminar: "; getline(cin, repuestoAEditar);
+    for (int i = 0; i < 25; i++) { //25
+        if (repuestos[1][i] == repuestoAEditar) {
+            repuestos[0][i] = "";
+            repuestos[1][i] = "";
+            repuestos[2][i] = "";
+            system("cls");
+            break;
+        }//Añadir un sistema que permita re ingresar un código en dado caso no se encuentre el ingresado
+    }
+    mostrarRepuestos();
 }
