@@ -68,23 +68,23 @@ void ingresarDatosRepuestos();
     //Generación de factura
 int consecutivo_factura = 0;
 //FECHA
-string placa_vehiculo = "", marca_vehiculo, repuestos_utilizados[5]; //Repuestos utilizados tiene como límite al usuario utilizar más de 5 marcas
+string placa_vehiculo = "", codigo_vehiculo = "", repuestos_utilizados[5]; //Repuestos utilizados tiene como límite al usuario utilizar más de 5 marcas
 float valor_total_factura = 0;
 void rellenarFactura() {
     cout << "HOLA, PARA PROCEDER CON LA FACTURA NECESITAREMOS QUE RELLENES UNOS DATOS: \n";
     cout << "Ingresa la placa del vehiculo: \n "; getline(cin, placa_vehiculo);
-    cout<<"Ingresa la marca del vehiculo, recuerda que debe de ser de las marcas que soportamos: \n ";
     mostrarMarcas();
-    
-    bool existe_la_marca = false;
+    cout << "Ingresa el codigo del vehiculo, recuerda que debe de ser de las marcas que soportamos: \n ";
+    getline(cin, codigo_vehiculo);
+    bool existe_el_codigo = false;
     do {
-        getline(cin, marca_vehiculo);
+        getline(cin, codigo_vehiculo);
         for (int i = 0; i < CANTIDAD_MARCAS; i++) {
-            if (marcas[i] == marca_vehiculo) {
-                existe_la_marca = true;
+            if (codigo_marcas[i] == codigo_vehiculo) {
+                existe_el_codigo = true;
             }
         }
-    } while (existe_la_marca == false);
+    } while (existe_el_codigo == false);
     cout << "Ingrese la lista de repuestos utilizados, ten en cuenta que solo permitimos 5 por visita: \n";
     for (int i = 0; i < 5; i++) {
         int aux_respuesta = 0;
@@ -236,6 +236,7 @@ int main()
                 cout << "2. Consultar costos de mantenimientos\n";
                 cout << "3. Atras\n";
                 cin >> movi;
+                cin.ignore();
                 system("cls");
                 if (movi == 1) {
                     int mant, conf_mant, cod_mant;
@@ -245,9 +246,10 @@ int main()
                     cout << "1.Si\n";
                     cout << "2.No\n";
                     cin >> conf_mant;
+                    cin.ignore();
+                    system("cls");
                     if (conf_mant == 1) {
-                        cout << "indique el codigo del mantenimiento realizado: ";
-                        cin >> cod_mant;
+                        rellenarFactura();
                     }
                 }
             }
