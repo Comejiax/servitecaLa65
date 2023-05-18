@@ -1,5 +1,8 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
+#include <ctime>
+#include <time.h>
 
 using namespace std;
 
@@ -32,7 +35,9 @@ string repuestos[3][25]; //Fila 0 ->Repuesto, Fila 1 -> codigo repuesto, Fila 2 
 
 
 // Constantes de límites de marcas, mantenimientos y repuestos
-const int CANTIDAD_MARCAS = 15, CANTIDAD_MANTENIMIENTOS = 25, CANTIDAD_REPUESTOS = CANTIDAD_MANTENIMIENTOS;
+const int CANTIDAD_MARCAS = 1 /*15*/,
+CANTIDAD_MANTENIMIENTOS = 1, /*25*/
+CANTIDAD_REPUESTOS = CANTIDAD_MANTENIMIENTOS;/*25*/
 
 
 //Declaración de funciones
@@ -60,13 +65,60 @@ void ingresarDatosRepuestos();
 
 
 
+    //Generación de factura
+int consecutivo_factura = 0;
+//FECHA
+string placa_vehiculo = "", marca_vehiculo, repuestos_utilizados[5]; //Repuestos utilizados tiene como límite al usuario utilizar más de 5 marcas
+float valor_total_factura = 0;
+void rellenarFactura() {
+    cout << "HOLA, PARA PROCEDER CON LA FACTURA NECESITAREMOS QUE RELLENES UNOS DATOS: \n";
+    cout << "Ingresa la placa del vehiculo: \n "; getline(cin, placa_vehiculo);
+    cout<<"Ingresa la marca del vehiculo, recuerda que debe de ser de las marcas que soportamos: \n ";
+    mostrarMarcas();
+    
+    bool existe_la_marca = false;
+    do {
+        getline(cin, marca_vehiculo);
+        for (int i = 0; i < CANTIDAD_MARCAS; i++) {
+            if (marcas[i] == marca_vehiculo) {
+                existe_la_marca = true;
+            }
+        }
+    } while (existe_la_marca == false);
+    cout << "Ingrese la lista de repuestos utilizados, ten en cuenta que solo permitimos 5 por visita: \n";
+    for (int i = 0; i < 5; i++) {
+        int aux_respuesta = 0;
+        cout << 5 - i << " Espacios restantes \n";
+        mostrarRepuestos();
+        cout << "Ingrese el repuesto que requieres: \n"; getline(cin, repuestos_utilizados[i]);
+        cout << "Quieres continuar agregando repuestos a la lista? 1. Si 2.No: \n "; cin>>aux_respuesta;
+        cin.ignore();
+        if (aux_respuesta != 1) {
+            break;
+            system("cls");
+        }
+        system("cls");
+    }
+    for (int i = 0; i < CANTIDAD_REPUESTOS; i++) {
+        for (int j = 0; j < 5;j++) {
+            if (repuestos_utilizados[j] == repuestos[0][i]) {
+                valor_total_factura += valor_mantenimiento[i];
+            }
+        }
+    }
+    valor_total_factura = (valor_total_factura * iva) + valor_total_factura;
+
+}
+void generarFactura(){}
+
+
 int main()
 {
-    //ingresarDatosMarcas();
-    //ingresarDatosMantenimiento();
-    //ingresarDatosRepuestos();
+    ingresarDatosMarcas();
+    ingresarDatosMantenimiento();
+    ingresarDatosRepuestos();
     cout << "FELICITACIONES, HAS LLENADO CORRECTAMENTE LOS DATOS. BIENVENIDO AL PROGRAMA" << endl << endl;
-    int opcion = 0, numero;
+    int opcion = 0, numero = 0;
     do{
         cout << "BIENVENIDO AL SISTEMA DE SERVITECA LA 45 S.A.S\n\n";
         cout << "1. Maestros\n";
@@ -173,40 +225,41 @@ int main()
             } while (opcion != 4); //Do while de los despliegues de menú de los maestros
 
         }
+        int movi = 0;
+        do {
+            if (numero == 2) {
+
+                cout << "MENU DE MOVIMIENTOS\n\n";
+                cout << "Bienvenido a nuestro menu de movimientos, aqui podras generar la factura correspondiente al servicio prestado al cliente\n";
+                cout << "Cuentanos que deseas realizar el dia de hoy\n";
+                cout << "1. Generar factura de venta\n";
+                cout << "2. Consultar costos de mantenimientos\n";
+                cout << "3. Atras\n";
+                cin >> movi;
+                system("cls");
+                if (movi == 1) {
+                    int mant, conf_mant, cod_mant;
+                    cout << "GENERADOR DE FACTURAS (SERVITECA LA 45 S.A.S)\n\n";
+                    cout << "A continuacion procederas a darnos un resumen de los articulos o procedimientos vendidos\n";
+                    cout << "Se realizo algun tipo de mantenimiento\n";
+                    cout << "1.Si\n";
+                    cout << "2.No\n";
+                    cin >> conf_mant;
+                    if (conf_mant == 1) {
+                        cout << "indique el codigo del mantenimiento realizado: ";
+                        cin >> cod_mant;
+                    }
+                }
+            }
+        } while (movi != 3);
     } while (opcion != 4);
 
 
     
     //MENU DE MOVIMIENTOS
-    int movi = 0;
-    do {
-        if (numero == 2) {
-            
-            cout << "MENÚ DE MOVIMIENTOS\n\n";
-            cout << "Bienvenido a nuestro menu de movimientos, aquí podrás generar la factura correspondiente al servicio prestado al cliente\n";
-            cout << "Cuentanos que deseas realizar el día de hoy\n";
-            cout << "1. Generar factura de venta\n";
-            cout << "2. Consultar costos de mantenimientos\n";
-            cout << "3. Atras\n";
-            cin >> movi;
-            system("cls");
-            if (movi == 1) {
-                int mant, conf_mant, cod_mant;
-                cout << "GENERADOR DE FACTURAS (SERVITECA LA 45 S.A.S)\n\n";
-                cout << "A continuacion procederás a darnos un resumen de los articulos o procedimientos vendidos\n";
-                cout << "Se realizo algun tipo de mantenimiento\n";
-                cout << "1.Si\n";
-                cout << "2.No\n";
-                cin >> conf_mant;
-                if (conf_mant == 1) {
-                    cout << "indique el codigo del mantenimiento realizado";
-                    cin >> cod_mant;
-                }
-            }
-        }
-    } while (movi != 3);
+    
         
-     
+    cout << "A";
     
 }
 
@@ -222,7 +275,9 @@ void mostrarMarcas() {
 void editarMarcas() {
     string marcaAEditar = "";
     int posicionDeLaMarcaAEditar = 0;
+    mostrarMarcas();
     cout << "Ingrese el codigo de la marca que quieras editar: "; cin >> marcaAEditar;
+    cin.ignore(); //Evita que el código actúe de forma no deseada por el CIN, si quieres evitar eso usa getline(cin, espacioAAlmacenar); o cin.ignore();    
     for (int i = 0; i < CANTIDAD_MARCAS; i++) {
         if (codigo_marcas[i] == marcaAEditar) {
             posicionDeLaMarcaAEditar = i;
@@ -244,6 +299,7 @@ void eliminarMarcas() {
     string marcaAEliminar = "";
     int posicionDeLaMarcaAEliminar = 0;
     cout << "Ingrese el codigo de la marca que quieras eliminar: "; cin >> marcaAEliminar;
+    cin.ignore(); //Evita que el código actúe de forma no deseada por el CIN, si quieres evitar eso usa getline(cin, espacioAAlmacenar); o cin.ignore();    
     for (int i = 0; i < CANTIDAD_MARCAS; i++) {
         if (codigo_marcas[i] == marcaAEliminar) {
             marcas[i] = "";
