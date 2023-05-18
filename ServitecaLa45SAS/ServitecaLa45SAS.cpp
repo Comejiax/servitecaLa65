@@ -73,9 +73,10 @@ float valor_total_factura = 0;
 void rellenarFactura() {
     cout << "HOLA, PARA PROCEDER CON LA FACTURA NECESITAREMOS QUE RELLENES UNOS DATOS: \n";
     cout << "Ingresa la placa del vehiculo: \n "; getline(cin, placa_vehiculo);
+    system("cls");
     mostrarMarcas();
     cout << "Ingresa el codigo del vehiculo, recuerda que debe de ser de las marcas que soportamos: \n ";
-    getline(cin, codigo_vehiculo);
+//    getline(cin, codigo_vehiculo);ServitecaLa45SAS / ServitecaLa45SAS.cpp
     bool existe_el_codigo = false;
     do {
         getline(cin, codigo_vehiculo);
@@ -85,12 +86,12 @@ void rellenarFactura() {
             }
         }
     } while (existe_el_codigo == false);
-    cout << "Ingrese la lista de repuestos utilizados, ten en cuenta que solo permitimos 5 por visita: \n";
+    cout << "Ingrese el codigo del repuesto utilizado, ten en cuenta que solo permitimos 5 por visita: \n";
     for (int i = 0; i < 5; i++) {
         int aux_respuesta = 0;
         cout << 5 - i << " Espacios restantes \n";
         mostrarRepuestos();
-        cout << "Ingrese el repuesto que requieres: \n"; getline(cin, repuestos_utilizados[i]);
+        cout << "Ingrese el codigo de repuesto que requieres: \n"; getline(cin, repuestos_utilizados[i]);
         cout << "Quieres continuar agregando repuestos a la lista? 1. Si 2.No: \n "; cin>>aux_respuesta;
         cin.ignore();
         if (aux_respuesta != 1) {
@@ -101,7 +102,7 @@ void rellenarFactura() {
     }
     for (int i = 0; i < CANTIDAD_REPUESTOS; i++) {
         for (int j = 0; j < 5;j++) {
-            if (repuestos_utilizados[j] == repuestos[0][i]) {
+            if (repuestos_utilizados[j] == repuestos[1][i]) {
                 valor_total_factura += valor_mantenimiento[i];
             }
         }
