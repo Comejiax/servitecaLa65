@@ -76,7 +76,7 @@ void rellenarFactura() {
     system("cls");
     mostrarMarcas();
     cout << "Ingresa el codigo del vehiculo, recuerda que debe de ser de las marcas que soportamos: \n ";
-//    getline(cin, codigo_vehiculo);ServitecaLa45SAS / ServitecaLa45SAS.cpp
+//getline(cin, codigo_vehiculo);ServitecaLa45SAS / ServitecaLa45SAS.cpp
     bool existe_el_codigo = false;
     do {
         getline(cin, codigo_vehiculo);
@@ -85,6 +85,7 @@ void rellenarFactura() {
                 existe_el_codigo = true;
             }
         }
+        system("cls");
     } while (existe_el_codigo == false);
     cout << "Ingrese el codigo del repuesto utilizado, ten en cuenta que solo permitimos 5 por visita: \n";
     for (int i = 0; i < 5; i++) {
@@ -95,8 +96,9 @@ void rellenarFactura() {
         cout << "Quieres continuar agregando repuestos a la lista? 1. Si 2.No: \n "; cin>>aux_respuesta;
         cin.ignore();
         if (aux_respuesta != 1) {
-            break;
             system("cls");
+            break;
+            
         }
         system("cls");
     }
@@ -108,6 +110,7 @@ void rellenarFactura() {
         }
     }
     valor_total_factura = (valor_total_factura * iva) + valor_total_factura;
+    cout << valor_total_factura;
 
 }
 void generarFactura(){}
