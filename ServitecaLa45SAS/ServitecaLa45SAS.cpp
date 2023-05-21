@@ -62,13 +62,13 @@ void ingresarDatosMarcas();
 void ingresarDatosMantenimiento();
 void ingresarDatosRepuestos();
 
-
+void generarFactura();
 
 
     //Generación de factura
 int consecutivo_factura = 0;
 //FECHA
-string placa_vehiculo = "", codigo_vehiculo = "", repuestos_utilizados[5]; //Repuestos utilizados tiene como límite al usuario utilizar más de 5 marcas
+string placa_vehiculo = "", codigo_vehiculo = "", marca_del_vehiculo = "", repuestos_utilizados[5]; //Repuestos utilizados tiene como límite al usuario utilizar más de 5 marcas
 float valor_total_factura = 0;
 void rellenarFactura() {
     cout << "HOLA, PARA PROCEDER CON LA FACTURA NECESITAREMOS QUE RELLENES UNOS DATOS: \n";
@@ -82,6 +82,7 @@ void rellenarFactura() {
         getline(cin, codigo_vehiculo);
         for (int i = 0; i < CANTIDAD_MARCAS; i++) {
             if (codigo_marcas[i] == codigo_vehiculo) {
+                marca_del_vehiculo = marcas[i];
                 existe_el_codigo = true;
             }
         }
@@ -110,10 +111,28 @@ void rellenarFactura() {
         }
     }
     valor_total_factura = (valor_total_factura * iva) + valor_total_factura;
-    cout << valor_total_factura;
+    //cout << valor_total_factura;
+    generarFactura();
 
 }
-void generarFactura(){}
+void generarFactura(){
+    consecutivo_factura++;
+    cout << "FACTURACION #" <<consecutivo_factura <<endl;
+    cout << "PLACA \t\t MARCA \t\t MANTENIMIENTO \t\t REPUESTO \t\t VALOR" << endl;
+    cout << placa_vehiculo << "\t\t" << marca_del_vehiculo << "\t\t";
+    for (int i = 0; i < CANTIDAD_REPUESTOS; i++) {
+        for (int j = 0; j < 5;j++) {
+            if (repuestos_utilizados[j] == repuestos[1][i]) {
+                cout<<tipo_mantenimiento[i]<<"\t\t" << repuestos[0][i] << ", \t\t" << valor_mantenimiento[i]<<endl;
+                cout << "     \t\t       \t\t\t";
+            }
+        }
+    }
+    cout << "\n";
+    cout << "     \t\t\t       \t\t\t TOTAL \t\t\t "<<valor_total_factura<< endl;
+    cout << "     \t\t\t       \t\t\t IVA \t\t\t " << valor_total_factura * iva << endl;
+    cout << "     \t\t\t       \t\t\t TOTAL NETO \t\t " << valor_total_factura + (valor_total_factura * iva) << endl;
+}
 
 
 int main()
@@ -230,6 +249,7 @@ int main()
 
         }
         int movi = 0;
+        //MENU DE MOVIMIENTOS
         do {
             if (numero == 2) {
 
@@ -237,8 +257,7 @@ int main()
                 cout << "Bienvenido a nuestro menu de movimientos, aqui podras generar la factura correspondiente al servicio prestado al cliente\n";
                 cout << "Cuentanos que deseas realizar el dia de hoy\n";
                 cout << "1. Generar factura de venta\n";
-                cout << "2. Consultar costos de mantenimientos\n";
-                cout << "3. Atras\n";
+                cout << "2. Atras\n";
                 cin >> movi;
                 cin.ignore();
                 system("cls");
@@ -257,15 +276,15 @@ int main()
                     }
                 }
             }
-        } while (movi != 3);
+        } while (movi != 2);
     } while (opcion != 4);
 
 
     
-    //MENU DE MOVIMIENTOS
+    
     
         
-    cout << "A";
+    
     
 }
 
